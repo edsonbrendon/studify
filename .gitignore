@@ -59,3 +59,4 @@ prisma/dev.db-journal
 .agents/
 .claude/
 .windsurf/
+/src/generated/prisma
