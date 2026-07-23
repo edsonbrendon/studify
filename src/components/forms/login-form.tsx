@@ -16,7 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FormField } from "@/components/ui/form-field";
+import { FormField } from "@/components/shared/form-field";
 import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
