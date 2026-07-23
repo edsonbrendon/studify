@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
@@ -9,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "@/actions/auth/login";
 import { LoginSchema, loginSchema } from "@/schemas/auth";
 
+import { FormField } from "@/components/shared/form-field";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,7 +19,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FormField } from "@/components/shared/form-field";
 import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
@@ -48,7 +50,6 @@ export function LoginForm() {
         });
 
         toast.error("E-mail ou senha inválidos.");
-
         return;
       }
 
@@ -62,51 +63,79 @@ export function LoginForm() {
   };
 
   return (
-    <Card className="mx-auto w-full max-w-md">
-      <CardHeader>
-        <CardTitle>Entrar</CardTitle>
-      </CardHeader>
+    <div className="w-full max-w-md">
+      <Link
+        href="/"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Voltar ao início
+      </Link>
 
-      <CardContent>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
-          <FormField
-            id="email"
-            label="E-mail"
-            error={errors.email?.message}
+      <Card className="border-0 shadow-xl">
+        <CardHeader className="space-y-4 text-center">
+          <div>
+            <CardTitle className="text-2xl">
+              Entrar
+            </CardTitle>
+
+            <p className="mt-2 text-sm text-muted-foreground">
+              Acesse sua conta para continuar sua jornada de estudos.
+            </p>
+          </div>
+        </CardHeader>
+
+        <CardContent>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6"
           >
-            <Input
+            <FormField
               id="email"
-              type="email"
-              placeholder="voce@email.com"
-              {...register("email")}
-            />
-          </FormField>
+              label="E-mail"
+              error={errors.email?.message}
+            >
+              <Input
+                id="email"
+                type="email"
+                placeholder="voce@email.com"
+                {...register("email")}
+              />
+            </FormField>
 
-          <FormField
-            id="password"
-            label="Senha"
-            error={errors.password?.message}
-          >
-            <Input
+            <FormField
               id="password"
-              type="password"
-              placeholder="********"
-              {...register("password")}
-            />
-          </FormField>
+              label="Senha"
+              error={errors.password?.message}
+            >
+              <Input
+                id="password"
+                type="password"
+                placeholder="********"
+                {...register("password")}
+              />
+            </FormField>
 
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Entrando..." : "Entrar"}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Entrando..." : "Entrar"}
+            </Button>
+          </form>
+
+          <div className="mt-8 text-center text-sm text-muted-foreground">
+            Não possui uma conta?{" "}
+            <Link
+              href="/register"
+              className="font-medium text-primary hover:underline"
+            >
+              Criar conta
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
