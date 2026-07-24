@@ -70,7 +70,7 @@ export function RegisterForm() {
         Voltar ao início
       </Link>
 
-      <Card className="shadow-xl">
+      <Card>
         <CardHeader className="space-y-4 text-center">
           <div>
             <CardTitle className="text-2xl">

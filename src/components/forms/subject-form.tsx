@@ -54,10 +54,6 @@ export function SubjectForm({
 
   return (
     <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Dados da matéria</CardTitle>
-      </CardHeader>
-
       <CardContent>
         <form
           onSubmit={handleSubmit(handleFormSubmit)}

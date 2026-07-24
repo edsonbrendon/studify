@@ -72,7 +72,7 @@ export function LoginForm() {
         Voltar ao início
       </Link>
 
-      <Card className="border-0 shadow-xl">
+      <Card>
         <CardHeader className="space-y-4 text-center">
           <div>
             <CardTitle className="text-2xl">

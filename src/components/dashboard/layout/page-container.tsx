@@ -18,10 +18,10 @@ export function PageContainer({
       {header}
 
       <div>
-        <h1 className="text-3xl font-bold">{title}</h1>
+        <h1 className="text-xl font-bold">{title}</h1>
 
         {description && (
-          <p className="text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             {description}
           </p>
         )}

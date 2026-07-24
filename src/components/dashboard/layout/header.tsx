@@ -3,7 +3,8 @@ import { auth } from "@/auth";
 export async function Header() {
   const session = await auth();
 
-  const name = session?.user?.name ?? "Usuário";
+  const fullName = session?.user?.name ?? "Usuário";
+  const firstName = fullName.split(" ")[0];
 
   const greeting = (() => {
     const hour = new Date().getHours();
@@ -18,7 +19,7 @@ export async function Header() {
     <header className="flex items-center justify-between border-b bg-background px-6 py-4">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">
-          {greeting}, {name}!
+          {greeting}, {firstName}!
         </h1>
 
         <p className="text-sm text-muted-foreground">
@@ -27,7 +28,7 @@ export async function Header() {
       </div>
 
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">
-        {name.charAt(0).toUpperCase()}
+        {firstName.charAt(0).toUpperCase()}
       </div>
     </header>
   );
