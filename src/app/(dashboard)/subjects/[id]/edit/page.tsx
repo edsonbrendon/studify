@@ -1,7 +1,11 @@
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getSubjectById } from "@/actions/subject/subject.actions";
+import { PageContainer } from "@/components/dashboard/layout/page-container";
 import { EditSubjectForm } from "@/components/forms/edit-subject-form";
+import { Button } from "@/components/ui/button";
 
 type EditSubjectPageProps = Readonly<{
   params: Promise<{
@@ -21,18 +25,23 @@ export default async function EditSubjectPage({
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">
-          Editar matéria
-        </h1>
-
-        <p className="text-muted-foreground">
-          Atualize as informações da matéria.
-        </p>
-      </div>
-
+    <PageContainer
+      header={
+        <Button
+          variant="outline"
+          asChild
+          className="w-fit"
+        >
+          <Link href="/subjects">
+            <ArrowLeft className="mr-2 size-4" />
+            Voltar
+          </Link>
+        </Button>
+      }
+      title="Editar matéria"
+      description="Atualize as informações da matéria."
+    >
       <EditSubjectForm subject={subject} />
-    </div>
+    </PageContainer>
   );
 }

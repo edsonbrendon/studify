@@ -53,7 +53,7 @@ export function SubjectForm({
   }
 
   return (
-    <Card className="max-w-xl">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Dados da matéria</CardTitle>
       </CardHeader>
