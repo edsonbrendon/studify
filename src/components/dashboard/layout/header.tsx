@@ -16,9 +16,9 @@ export async function Header() {
   })();
 
   return (
-    <header className="flex items-center justify-between border-b bg-background px-6 py-4">
+    <header className="flex items-center justify-between border-b bg-background px-6 py-3">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">
+        <h1 className="text-xl font-bold tracking-tight">
           {greeting}, {firstName}!
         </h1>
 
@@ -27,7 +27,7 @@ export async function Header() {
         </p>
       </div>
 
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">
+      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
         {firstName.charAt(0).toUpperCase()}
       </div>
     </header>

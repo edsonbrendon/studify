@@ -44,7 +44,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-r bg-background">
+    <aside className="fixed inset-y-0 left-0 flex w-64 flex-col border-r bg-background">
       <div className="border-b px-6 py-5">
         <Link
           href="/dashboard"
