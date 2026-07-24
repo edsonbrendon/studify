@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { getSubjectById } from "@/actions/subject/subject.actions";
 import { PageContainer } from "@/components/dashboard/layout/page-container";
-import { EditSubjectForm } from "@/components/forms/edit-subject-form";
+import { EditSubjectForm } from "@/components/subjects/edit-subject-form";
 import { Button } from "@/components/ui/button";
 
 type EditSubjectPageProps = Readonly<{

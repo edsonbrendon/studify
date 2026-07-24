@@ -6,7 +6,7 @@ import { Subject } from "@prisma/client";
 import { toast } from "sonner";
 
 import { updateSubject } from "@/actions/subject/subject.actions";
-import { SubjectForm } from "@/components/forms/subject-form";
+import { SubjectForm } from "@/components/subjects/subject-form";
 
 type EditSubjectFormProps = Readonly<{
   subject: Subject;

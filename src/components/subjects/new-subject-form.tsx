@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { createSubject } from "@/actions/subject/subject.actions";
-import { SubjectForm } from "@/components/forms/subject-form";
+import { SubjectForm } from "@/components/subjects/subject-form";
 import { CreateSubjectInput } from "@/schemas/subject/subject.schema";
 
 export function NewSubjectForm() {

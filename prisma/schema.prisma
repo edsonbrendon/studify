@@ -24,7 +24,7 @@ model User {
 model Subject {
   id    String  @id @default(cuid())
   name  String
-  color String?
+  color String
 
   userId String
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -55,7 +55,6 @@ model StudySession {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId])
+  @@index([userId, studyDate])
   @@index([subjectId])
-  @@index([studyDate])
 }

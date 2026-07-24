@@ -6,6 +6,7 @@ import { signOut } from "next-auth/react";
 
 import {
   BookOpen,
+  BookText,
   Home,
   LogOut,
   User,
@@ -23,6 +24,11 @@ const navigation = [
     title: "Matérias",
     href: "/subjects",
     icon: BookOpen,
+  },
+  {
+    title: "Sessões",
+    href: "/study-sessions",
+    icon: BookText,
   },
 ];
 
