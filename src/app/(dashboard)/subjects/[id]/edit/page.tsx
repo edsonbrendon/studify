@@ -26,18 +26,6 @@ export default async function EditSubjectPage({
 
   return (
     <PageContainer
-      header={
-        <Button
-          variant="outline"
-          asChild
-          className="w-fit"
-        >
-          <Link href="/subjects">
-            <ArrowLeft className="mr-2 size-4" />
-            Voltar
-          </Link>
-        </Button>
-      }
       title="Editar matéria"
       description="Atualize as informações da matéria."
     >

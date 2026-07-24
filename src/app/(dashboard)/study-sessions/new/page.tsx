@@ -11,18 +11,6 @@ export default async function NewStudySessionPage() {
 
   return (
     <PageContainer
-      header={
-        <Button
-          variant="outline"
-          asChild
-          className="w-fit"
-        >
-          <Link href="/study-sessions">
-            <ArrowLeft className="mr-2 size-4" />
-            Voltar
-          </Link>
-        </Button>
-      }
       title="Nova sessão de estudo"
       description="Registre uma nova sessão para acompanhar sua evolução."
     >

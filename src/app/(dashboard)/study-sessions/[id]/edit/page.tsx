@@ -30,18 +30,6 @@ export default async function EditStudySessionPage({
 
   return (
     <PageContainer
-      header={
-        <Button
-          variant="outline"
-          asChild
-          className="w-fit"
-        >
-          <Link href="/study-sessions">
-            <ArrowLeft className="mr-2 size-4" />
-            Voltar
-          </Link>
-        </Button>
-      }
       title="Editar sessão de estudo"
       description="Atualize as informações da sessão de estudo."
     >

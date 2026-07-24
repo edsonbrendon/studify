@@ -1,6 +1,6 @@
 import { StudySession, Subject } from "@prisma/client";
 
-import { EmptyStudySessions } from "@/components/study-sessions/empty-study-sessions";
+import { EmptyStudySessions } from "@/components/shared/empty-study-sessions";
 import { StudySessionCard } from "@/components/study-sessions/study-session-card";
 
 type StudySessionWithSubject = StudySession & {

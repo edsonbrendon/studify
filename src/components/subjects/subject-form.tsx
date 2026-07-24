@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 
 import { ColorPicker } from "@/components/subjects/color-picker";
@@ -26,6 +27,7 @@ export function SubjectForm({
   submitLabel = "Salvar",
   onSubmit,
 }: SubjectFormProps) {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const {
@@ -45,6 +47,14 @@ export function SubjectForm({
     startTransition(async () => {
       await onSubmit(data);
     });
+  }
+
+  function handleCancel() {
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/subjects");
+    }
   }
 
   return (
@@ -95,12 +105,22 @@ export function SubjectForm({
             )}
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleCancel}
+            >
+              Cancelar
+            </Button>
+
             <Button
               type="submit"
               disabled={isPending}
             >
-              {isPending ? "Salvando..." : submitLabel}
+              {isPending
+                ? "Salvando..."
+                : submitLabel}
             </Button>
           </div>
         </form>

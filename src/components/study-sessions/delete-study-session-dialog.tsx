@@ -19,7 +19,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "../ui/button";
+
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 type DeleteStudySessionDialogProps = Readonly<{
   studySession: StudySession;
@@ -38,7 +39,6 @@ export function DeleteStudySessionDialog({
 
       if (!result.success) {
         toast.error(result.message);
-
         return;
       }
 
@@ -49,12 +49,13 @@ export function DeleteStudySessionDialog({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
+        <DropdownMenuItem
           variant="destructive"
-          size="icon"
+          onSelect={(event) => event.preventDefault()}
         >
-          <Trash2 className="size-4" />
-        </Button>
+          <Trash2 />
+          Excluir
+        </DropdownMenuItem>
       </AlertDialogTrigger>
 
       <AlertDialogContent>

@@ -1,12 +1,18 @@
 import { StudySession, Subject } from "@prisma/client";
+import {
+  BookOpen,
+  Calendar,
+  Clock,
+} from "lucide-react";
 
-import { StudySessionActions } from "@/components/study-sessions/study-session-actions";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import { StudySessionActions } from "./study-session-actions";
 
 type StudySessionCardProps = Readonly<{
   studySession: StudySession & {
@@ -19,35 +25,54 @@ export function StudySessionCard({
 }: StudySessionCardProps) {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{studySession.title}</CardTitle>
-      </CardHeader>
+      <CardHeader className="flex flex-row items-start justify-between space-y-0">
+        <div className="flex items-center gap-3">
+          <div
+            className="flex size-10 items-center justify-center rounded-lg"
+            style={{
+              backgroundColor:
+                studySession.subject.color,
+            }}
+          >
+            <BookOpen className="size-5 text-white" />
+          </div>
 
-      <CardContent className="space-y-2 text-sm">
-        <p>
-          <strong>Matéria:</strong>{" "}
-          {studySession.subject.name}
-        </p>
+          <div>
+            <CardTitle>
+              {studySession.title}
+            </CardTitle>
 
-        <p>
-          <strong>Duração:</strong>{" "}
-          {studySession.duration} min
-        </p>
-
-        <p>
-          <strong>Data:</strong>{" "}
-          {studySession.studyDate.toLocaleDateString(
-            "pt-BR"
-          )}
-        </p>
-
-        {studySession.description && (
-          <p>{studySession.description}</p>
-        )}
+            <p className="text-sm text-muted-foreground">
+              {studySession.subject.name}
+            </p>
+          </div>
+        </div>
 
         <StudySessionActions
           studySession={studySession}
         />
+      </CardHeader>
+
+      <CardContent className="space-y-4">
+        {studySession.description && (
+          <p className="text-sm text-muted-foreground">
+            {studySession.description}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <Clock className="size-4" />
+            {studySession.duration} min
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Calendar className="size-4" />
+            {studySession.studyDate.toLocaleDateString(
+              "pt-BR"
+            )}
+          </div>
+        </div>
       </CardContent>
     </Card>
   );

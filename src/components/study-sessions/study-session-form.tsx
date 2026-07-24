@@ -4,6 +4,7 @@ import { useTransition } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Subject } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -44,6 +45,7 @@ export function StudySessionForm({
   submitLabel = "Salvar",
   onSubmit,
 }: StudySessionFormProps) {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const {
@@ -73,6 +75,14 @@ export function StudySessionForm({
         studyDate: new Date(data.studyDate),
       });
     });
+  }
+
+  function handleCancel() {
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/study-sessions");
+    }
   }
 
   return (
@@ -202,7 +212,15 @@ export function StudySessionForm({
             )}
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleCancel}
+            >
+              Cancelar
+            </Button>
+
             <Button
               type="submit"
               disabled={isPending}

@@ -13,7 +13,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Subject" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "color" TEXT,
+    "color" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
@@ -45,10 +45,7 @@ CREATE INDEX "Subject_userId_idx" ON "Subject"("userId");
 CREATE UNIQUE INDEX "Subject_userId_name_key" ON "Subject"("userId", "name");
 
 -- CreateIndex
-CREATE INDEX "StudySession_userId_idx" ON "StudySession"("userId");
+CREATE INDEX "StudySession_userId_studyDate_idx" ON "StudySession"("userId", "studyDate");
 
 -- CreateIndex
 CREATE INDEX "StudySession_subjectId_idx" ON "StudySession"("subjectId");
-
--- CreateIndex
-CREATE INDEX "StudySession_studyDate_idx" ON "StudySession"("studyDate");
