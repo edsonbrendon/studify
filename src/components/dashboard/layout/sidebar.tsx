@@ -1,8 +1,8 @@
- "use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
- import { signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 import {
   BookOpen,
@@ -48,7 +48,7 @@ export function Sidebar() {
         </Link>
       </div>
 
-      <nav className="flex-1 space-y-8 p-4">
+      <nav className="flex flex-1 flex-col justify-between p-4">
         <div className="space-y-1">
           {navigation.map(({ title, href, icon: Icon }) => (
             <Link
@@ -86,7 +86,7 @@ export function Sidebar() {
 
           <button
             type="button"
-            onClick={() => signOut()}
+            onClick={() => signOut({ callbackUrl: "/" })}
             className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             <LogOut className="h-5 w-5" />
