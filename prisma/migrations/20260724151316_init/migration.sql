@@ -5,7 +5,6 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "image" TEXT,
-    "weeklyGoalHours" INTEGER NOT NULL DEFAULT 10,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
@@ -14,7 +13,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Subject" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "color" TEXT NOT NULL DEFAULT '#2563EB',
+    "color" TEXT,
     "userId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
@@ -40,7 +39,10 @@ CREATE TABLE "StudySession" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Subject_name_userId_key" ON "Subject"("name", "userId");
+CREATE INDEX "Subject_userId_idx" ON "Subject"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Subject_userId_name_key" ON "Subject"("userId", "name");
 
 -- CreateIndex
 CREATE INDEX "StudySession_userId_idx" ON "StudySession"("userId");

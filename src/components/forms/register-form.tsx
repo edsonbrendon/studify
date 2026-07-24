@@ -8,8 +8,8 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { registerUser } from "@/actions/auth/register";
-import { registerSchema, RegisterSchema } from "@/schemas/auth";
+import { registerUser } from "@/actions/auth/register.actions";
+import { registerSchema, RegisterSchema } from "@/schemas/auth/auth.schema";
 
 import { FormField } from "@/components/shared/form-field";
 import { Button } from "@/components/ui/button";

@@ -6,5 +6,6 @@ export type ActionResult<T = unknown> =
     }
   | {
       success: false;
-      errors: Record<string, string[]>;
+      message?: string;
+      errors?: Record<string, string[]>;
     };

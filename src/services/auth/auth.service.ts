@@ -2,11 +2,10 @@ import bcrypt from "bcryptjs";
 
 import { signIn } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { LoginSchema, RegisterSchema } from "@/schemas/auth";
-import { ActionResult } from "@/types/action";
+import { LoginSchema, RegisterSchema } from "@/schemas/auth/auth.schema";
 
 export class AuthService {
-  async register(data: RegisterSchema): Promise<ActionResult> {
+  async register(data: RegisterSchema) {
     const { name, email, password } = data;
 
     const existingUser = await prisma.user.findUnique({
@@ -14,12 +13,7 @@ export class AuthService {
     });
 
     if (existingUser) {
-      return {
-        success: false,
-        errors: {
-          email: ["Já existe um usuário com esse e-mail."],
-        },
-      };
+      throw new Error("Já existe um usuário com esse e-mail.");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,14 +25,9 @@ export class AuthService {
         password: hashedPassword,
       },
     });
-
-    return {
-      success: true,
-      message: "Usuário criado com sucesso.",
-    };
   }
 
-  async login(data: LoginSchema): Promise<ActionResult> {
+  async login(data: LoginSchema) {
     const { email, password } = data;
 
     try {
@@ -47,17 +36,8 @@ export class AuthService {
         password,
         redirect: false,
       });
-
-      return {
-        success: true,
-      };
     } catch {
-      return {
-        success: false,
-        errors: {
-          email: ["E-mail ou senha inválidos."],
-        },
-      };
+      throw new Error("E-mail ou senha inválidos.");
     }
   }
 }
