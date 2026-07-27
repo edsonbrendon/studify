@@ -7,7 +7,7 @@ import {
 
 import { getDashboardStatsAction } from "@/actions/dashboard/dashboard.actions";
 
-import { SummaryCard } from "./cards/summary-card";
+import { SummaryCard } from "./summary-card";
 
 function formatMinutes(minutes: number) {
   const hours = Math.floor(minutes / 60);
