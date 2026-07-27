@@ -40,12 +40,6 @@ export function SubjectCard({
 
         <SubjectActions subject={subject} />
       </CardHeader>
-
-      <CardContent>
-        <p className="text-sm text-muted-foreground">
-          Nenhuma sessão de estudo registrada.
-        </p>
-      </CardContent>
     </Card>
   );
 }
