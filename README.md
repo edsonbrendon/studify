@@ -28,7 +28,7 @@ O projeto foi desenvolvido com foco em boas práticas de arquitetura, utilizando
 - Shadcn/UI
 - Auth.js (NextAuth v5)
 - Prisma ORM
-- PostgreSQL (Neon)
+- PostgreSQL
 - React Hook Form
 - Zod
 - Lucide React
@@ -87,7 +87,6 @@ src
 │   ├── profile
 │   ├── study-sessions
 │   ├── subjects
-│   ├── shared
 │   └── ui
 ├── lib
 ├── schemas
@@ -106,7 +105,11 @@ prisma
 
 ## Banco de Dados
 
-O projeto utiliza Prisma ORM com PostgreSQL hospedado no Neon.
+O projeto utiliza Prisma ORM com PostgreSQL.
+
+Durante o desenvolvimento, é possível utilizar uma instância local do PostgreSQL ou um banco hospedado no Neon.
+
+A aplicação em produção está publicada utilizando PostgreSQL hospedado no Neon.
 
 Principais entidades:
 
@@ -223,6 +226,8 @@ Configure as variáveis de ambiente:
 cp .env.example .env
 ```
 
+> **Pré-requisito:** É necessário ter acesso a um banco PostgreSQL (local ou hospedado) e configurar a variável `DATABASE_URL`.
+
 Preencha as variáveis:
 
 ```env
@@ -292,7 +297,7 @@ Durante o desenvolvimento foram adotadas as seguintes decisões:
 - Separação da aplicação em Componentes, Server Actions e Services;
 - Centralização da validação utilizando Zod;
 - Utilização do Prisma ORM para acesso ao banco de dados;
-- Banco de dados PostgreSQL hospedado no Neon;
+- Banco de dados PostgreSQL;
 - Componentes reutilizáveis construídos com Shadcn/UI;
 - Autenticação utilizando Auth.js com JWT;
 - Layout responsivo desenvolvido com Tailwind CSS.
