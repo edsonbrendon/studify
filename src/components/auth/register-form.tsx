@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
@@ -23,6 +24,7 @@ import { Input } from "@/components/ui/input";
 
 export function RegisterForm() {
   const router = useRouter();
+  const { update } = useSession();
 
   const {
     register,
@@ -39,7 +41,7 @@ export function RegisterForm() {
 
       if (!response.success) {
         (
-          Object.entries(response.errors) as [
+          Object.entries(response.errors ?? {}) as [
             keyof RegisterSchema,
             string[],
           ][]
@@ -54,7 +56,10 @@ export function RegisterForm() {
 
       toast.success("Conta criada com sucesso!");
 
-      router.push("/login");
+      await update();
+
+      router.push("/dashboard");
+      router.refresh();
     } catch {
       toast.error("Erro ao criar a conta.");
     }

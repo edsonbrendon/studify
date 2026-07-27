@@ -25,6 +25,8 @@ export class AuthService {
         password: hashedPassword,
       },
     });
+
+    await this.login({ email, password });
   }
 
   async login(data: LoginSchema) {

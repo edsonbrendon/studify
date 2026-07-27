@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
@@ -23,6 +24,7 @@ import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
   const router = useRouter();
+  const { update } = useSession();
 
   const {
     register,
@@ -39,7 +41,7 @@ export function LoginForm() {
 
       if (!response.success) {
         (
-          Object.entries(response.errors) as [
+          Object.entries(response.errors ?? {}) as [
             keyof LoginSchema,
             string[],
           ][]
@@ -54,6 +56,8 @@ export function LoginForm() {
       }
 
       toast.success("Login realizado com sucesso!");
+
+      await update();
 
       router.push("/dashboard");
       router.refresh();
