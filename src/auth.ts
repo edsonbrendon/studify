@@ -1,10 +1,13 @@
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import Credentials from "next-auth/providers/credentials";
 
+import authConfig from "@/auth.config";
 import { prisma } from "@/lib/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  ...authConfig,
+
   session: {
     strategy: "jwt",
   },
@@ -17,7 +20,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
 
       async authorize(credentials) {
-        if (!credentials.email || !credentials.password) {
+        if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
