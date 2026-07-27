@@ -14,7 +14,7 @@ export default function DashboardLayout({
     <div className="min-h-screen bg-muted/30">
       <Sidebar />
 
-      <div className="ml-64 flex min-h-screen flex-col">
+      <div className="ml-56 flex min-h-screen flex-col">
         <Header />
 
         <main className="flex-1 p-6">

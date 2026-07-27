@@ -44,24 +44,24 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed inset-y-0 left-0 flex w-64 flex-col border-r bg-background">
-      <div className="border-b px-6 py-5">
+    <aside className="fixed inset-y-0 left-0 flex w-56 flex-col border-r border-zinc-200 bg-zinc-50">
+      <div className="border-b px-5 py-4">
         <Link
           href="/dashboard"
-          className="text-2xl font-extrabold tracking-tight text-primary"
+          className="text-xl font-bold tracking-tight text-primary"
         >
           Studify
         </Link>
       </div>
 
-      <nav className="flex flex-1 flex-col justify-between p-4">
+      <nav className="flex flex-1 flex-col justify-between p-3">
         <div className="space-y-1">
           {navigation.map(({ title, href, icon: Icon }) => (
             <Link
               key={href}
               href={href}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 pathname === href
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -73,13 +73,13 @@ export function Sidebar() {
           ))}
         </div>
 
-        <div className="space-y-1 border-t pt-6">
+        <div className="space-y-1 border-t pt-4">
           {secondaryNavigation.map(({ title, href, icon: Icon }) => (
             <Link
               key={href}
               href={href}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 pathname === href
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
