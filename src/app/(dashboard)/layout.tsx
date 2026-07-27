@@ -14,13 +14,13 @@ export default function DashboardLayout({
     <div className="min-h-screen bg-muted/30">
       <Sidebar />
 
-      <div className="ml-56 flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col md:ml-56">
         <Header />
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 px-4 py-5 md:p-6">
           {children}
         </main>
       </div>
     </div>
   );
-}
+} 

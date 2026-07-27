@@ -40,14 +40,30 @@ const secondaryNavigation = [
   },
 ];
 
-export function Sidebar() {
+type SidebarContentProps = {
+  onNavigate?: () => void;
+};
+
+export function SidebarContent({
+  onNavigate,
+}: SidebarContentProps) {
   const pathname = usePathname();
 
+  function handleNavigate() {
+    onNavigate?.();
+  }
+
+  function handleSignOut() {
+    onNavigate?.();
+    signOut({ callbackUrl: "/" });
+  }
+
   return (
-    <aside className="fixed inset-y-0 left-0 flex w-56 flex-col border-r border-zinc-200 bg-zinc-50">
+    <>
       <div className="border-b px-5 py-4">
         <Link
           href="/dashboard"
+          onClick={handleNavigate}
           className="text-xl font-bold tracking-tight text-primary"
         >
           Studify
@@ -60,6 +76,7 @@ export function Sidebar() {
             <Link
               key={href}
               href={href}
+              onClick={handleNavigate}
               className={cn(
                 "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 pathname === href
@@ -78,6 +95,7 @@ export function Sidebar() {
             <Link
               key={href}
               href={href}
+              onClick={handleNavigate}
               className={cn(
                 "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 pathname === href
@@ -92,14 +110,22 @@ export function Sidebar() {
 
           <button
             type="button"
-            onClick={() => signOut({ callbackUrl: "/" })}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            onClick={handleSignOut}
+            className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             <LogOut className="h-5 w-5" />
             Sair
           </button>
         </div>
       </nav>
+    </>
+  );
+}
+
+export function Sidebar() {
+  return (
+    <aside className="fixed inset-y-0 left-0 hidden w-56 flex-col border-r border-zinc-200 bg-zinc-50 md:flex">
+      <SidebarContent />
     </aside>
   );
 }
