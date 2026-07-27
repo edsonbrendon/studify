@@ -1,6 +1,8 @@
 # Studify
 
-O Studify é uma plataforma para gerenciamento de estudos desenvolvida com Next.js 15. A aplicação permite que usuários organizem suas matérias, registrem sessões de estudo e acompanhem seu progresso de forma simples e intuitiva.
+Studify é uma plataforma para gerenciamento de estudos desenvolvida com Next.js. A aplicação permite que usuários organizem suas matérias, registrem sessões de estudo e acompanhem seu progresso por meio de um dashboard intuitivo.
+
+O projeto foi desenvolvido com foco em boas práticas de arquitetura, utilizando Server Actions, Auth.js, Prisma ORM e PostgreSQL.
 
 ---
 
@@ -19,17 +21,18 @@ O Studify é uma plataforma para gerenciamento de estudos desenvolvida com Next.
 
 ## Tecnologias
 
-- Next.js 15
+- Next.js 16
 - React 19
 - TypeScript
 - Tailwind CSS
 - Shadcn/UI
-- Auth.js (NextAuth)
+- Auth.js (NextAuth v5)
 - Prisma ORM
-- SQLite
+- PostgreSQL (Neon)
 - React Hook Form
 - Zod
 - Lucide React
+- Vercel
 
 ---
 
@@ -47,7 +50,7 @@ Server Action
 Service
     │
     ▼
-Prisma
+Prisma ORM
 ```
 
 ### Componentes
@@ -67,7 +70,7 @@ Responsáveis por:
 
 Responsáveis pelas regras de negócio da aplicação.
 
-### Prisma
+### Prisma ORM
 
 Responsável pelo acesso e persistência dos dados.
 
@@ -77,26 +80,33 @@ Responsável pelo acesso e persistência dos dados.
 
 ```text
 src
+├── actions
 ├── app
 ├── components
 │   ├── dashboard
-│   ├── layout
 │   ├── profile
 │   ├── study-sessions
 │   ├── subjects
+│   ├── shared
 │   └── ui
 ├── lib
 ├── schemas
 ├── services
-├── prisma
-└── types
+├── types
+├── auth.ts
+├── auth.config.ts
+└── middleware.ts
+
+prisma
+├── migrations
+└── schema.prisma
 ```
 
 ---
 
 ## Banco de Dados
 
-O projeto utiliza Prisma ORM com SQLite durante o desenvolvimento.
+O projeto utiliza Prisma ORM com PostgreSQL hospedado no Neon.
 
 Principais entidades:
 
@@ -163,9 +173,11 @@ As alterações são refletidas imediatamente na sessão autenticada.
 
 ## Autenticação
 
-A autenticação foi implementada utilizando Auth.js com estratégia JWT.
+A autenticação foi implementada utilizando Auth.js (NextAuth v5) com estratégia JWT.
 
 Cada usuário possui acesso apenas aos seus próprios dados.
+
+Para otimizar o bundle do middleware em produção, a configuração do Auth.js foi separada entre `auth.ts` e `auth.config.ts`, seguindo a recomendação oficial da biblioteca.
 
 ---
 
@@ -190,7 +202,7 @@ O layout é totalmente responsivo, oferecendo uma boa experiência tanto em disp
 Clone o repositório:
 
 ```bash
-git clone https://github.com/SEU-USUARIO/studify.git
+git clone https://github.com/edsonbrendon/studify.git
 ```
 
 Acesse a pasta do projeto:
@@ -205,15 +217,29 @@ Instale as dependências:
 npm install
 ```
 
-Configure as variáveis de ambiente copiando o arquivo de exemplo:
+Configure as variáveis de ambiente:
 
 ```bash
 cp .env.example .env
 ```
 
-Depois, ajuste os valores conforme necessário.
+Preencha as variáveis:
 
-Gere o cliente do Prisma:
+```env
+DATABASE_URL="postgresql://..."
+
+AUTH_SECRET="your_auth_secret"
+
+AUTH_URL="http://localhost:3000"
+```
+
+Gere o Prisma Client:
+
+```bash
+npm run prisma:generate
+```
+
+ou
 
 ```bash
 npx prisma generate
@@ -230,6 +256,20 @@ Inicie a aplicação:
 ```bash
 npm run dev
 ```
+
+---
+
+## Deploy
+
+O projeto está preparado para deploy na Vercel utilizando PostgreSQL hospedado no Neon.
+
+Para produção, configure as seguintes variáveis de ambiente:
+
+- `DATABASE_URL`
+- `AUTH_SECRET`
+- `AUTH_URL`
+
+Após configurar as variáveis, basta realizar o deploy na Vercel.
 
 ---
 
@@ -252,7 +292,9 @@ Durante o desenvolvimento foram adotadas as seguintes decisões:
 - Separação da aplicação em Componentes, Server Actions e Services;
 - Centralização da validação utilizando Zod;
 - Utilização do Prisma ORM para acesso ao banco de dados;
+- Banco de dados PostgreSQL hospedado no Neon;
 - Componentes reutilizáveis construídos com Shadcn/UI;
+- Autenticação utilizando Auth.js com JWT;
 - Layout responsivo desenvolvido com Tailwind CSS.
 
 ---
@@ -266,6 +308,7 @@ Algumas funcionalidades planejadas para versões futuras:
 - Calendário de estudos
 - Modo escuro
 - Pesquisa avançada
+- Filtros por período
 
 ---
 
